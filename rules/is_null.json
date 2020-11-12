@@ -1,0 +1,9 @@
+{
+  "id": "not_null",
+  "arguments": [
+    {
+      "type": "column",
+      "value": "address"
+    }
+  ]
+}

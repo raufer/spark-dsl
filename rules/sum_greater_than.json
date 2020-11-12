@@ -1,0 +1,17 @@
+{
+  "id": "sum_greater_than",
+  "arguments": [
+    {
+      "type": "column",
+      "value": "salary"
+    },
+    {
+      "type": "column",
+      "value": "age"
+    },
+    {
+      "type": "integer",
+      "value": 42100
+    }
+  ]
+}

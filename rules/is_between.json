@@ -1,0 +1,17 @@
+{
+  "id": "is_between",
+  "arguments": [
+    {
+      "type": "column",
+      "value": "salary"
+    },
+    {
+      "type": "integer",
+      "value": 70000
+    },
+    {
+      "type": "integer",
+      "value": 10000
+    }
+  ]
+}
