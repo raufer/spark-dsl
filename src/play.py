@@ -15,7 +15,7 @@ data = [
     ('Jon', 42, 99000, 'City D'),
     ('Kyu', 42, 92000, 'City E'),
     ('Raj', 42, 89000, 'City F'),
-    ('Bruno', 29, 42000, 'Herdade Parra')
+    ('Bruno', 29, 42000, 'Herdade Parra'),
     ('Roy', 29, 43000, None)
 ]
 

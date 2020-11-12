@@ -1,4 +1,5 @@
 import pyspark
+import logging
 
 import pyspark.sql.functions as F
 import pyspark.sql.types as T
@@ -11,6 +12,9 @@ from typing import Dict
 
 from src.dsl.parse.function import parse_function
 from functools import reduce
+
+
+logger = logging.getLogger(__name__)
 
 
 def apply_functions(df: DataFrame, rules: Union[List[Dict], Dict]) -> DataFrame:
@@ -31,6 +35,7 @@ def apply_functions(df: DataFrame, rules: Union[List[Dict], Dict]) -> DataFrame:
     def reducer(acc, x):
         name, rule = x
         op = parse_function(rule)
+        logger.info(f"Function: {op}")
         acc = acc.withColumn(name, op)
         return acc
 
