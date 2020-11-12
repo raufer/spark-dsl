@@ -10,13 +10,13 @@ from src.ops.io.files import read_json
 
 data = [
     ('Joe', 42, 98000, 'City A'),
-    ('Sue', 42, 83000, 'City B'),
-    ('Bob', 42, 72000, 'City C'),
+    ('Sue', 49, 83000, 'City B'),
+    ('Bob', 30, 72000, 'City C'),
     ('Jon', 42, 99000, 'City D'),
-    ('Kyu', 42, 92000, 'City E'),
-    ('Raj', 42, 89000, 'City F'),
+    ('Kyu', 23, 92000, 'City E'),
+    ('Raj', 41, 89000, 'City F'),
     ('Bruno', 29, 42000, 'Herdade Parra'),
-    ('Roy', 29, 43000, None)
+    ('Roy', 29, 79000, None)
 ]
 
 df = spark.createDataFrame(data, ['name', 'age', 'salary', 'address'])
