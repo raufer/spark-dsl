@@ -17,6 +17,7 @@ def not_null(col: Col) -> Bool:
 def is_between(col: Col, a: float, b: float) -> Bool:
     """
     Checks if a column is within a numerical range
+    TODO: note that a NULL will not return in False; the NULL is propagated
     """
     op = (col >= a) & (col <= b)
     return op

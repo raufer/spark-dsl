@@ -1,6 +1,3 @@
-import sys
-sys.path.append('/Users/raulferreira/garuda/poc-dsl')
-
 import os
 import logging
 import warnings
