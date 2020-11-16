@@ -1,7 +1,7 @@
 import unittest
 
 from src.constants.argument_types import ARGUMENT_TYPES as T
-from src.models.argument import Argument
+from src.models.dq.argument import Argument
 
 
 class TestArgument(unittest.TestCase):

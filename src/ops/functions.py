@@ -1,20 +1,18 @@
 import pyspark
-
 import pyspark.sql.functions as F
-from pyspark.sql import Column
 
-Col = Column
-Bool = Column
+from src.models.engine.column import Column
+from typing import Any
 
 
-def not_null(col: Col) -> Bool:
+def not_null(col: Column[Any]) -> Column[bool]:
     """
     Checks if a column is not null
     """
     return col.isNotNull()
 
 
-def is_between(col: Col, a: float, b: float) -> Bool:
+def is_between(col: Column[Any], a: float, b: float) -> Column[bool]:
     """
     Checks if a column is within a numerical range
     TODO: note that a NULL will not return in False; the NULL is propagated
@@ -23,7 +21,7 @@ def is_between(col: Col, a: float, b: float) -> Bool:
     return op
 
 
-def sum_greater_than(a: Col, b: Col, val: float) -> Bool:
+def sum_greater_than(a: Column[Any], b: Column[Any], val: float) -> Column[bool]:
     """
     Checks if the sum of two columns is bigger than a value
     """

@@ -1,5 +1,12 @@
+import logging
+
+import pyspark.sql.functions as F
+
 from typing import Any
 from src.constants.argument_types import ARGUMENT_TYPES as T
+
+
+logger = logging.getLogger(__name__)
 
 
 NATIVE_TYPES = {
@@ -21,7 +28,7 @@ def _parse_value(type: str, value: Any) -> Any:
         return value
 
     if type == T.COLUMN:
-        return value
+        return F.col(value)
 
 
 class Argument(object):
@@ -32,7 +39,10 @@ class Argument(object):
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):
-            return self.__dict__ == other.__dict__
+            if (self.type == other.type) and (self.type == T.COLUMN):
+                return str(self.value) == str(other.value)
+            else:
+                return self.__dict__ == other.__dict__
         else:
             return False
 
