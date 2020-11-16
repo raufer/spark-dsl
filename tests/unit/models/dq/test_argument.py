@@ -1,4 +1,5 @@
 import unittest
+import pyspark.sql.functions as F
 
 from src.constants.argument_types import ARGUMENT_TYPES as T
 from src.models.dq.argument import Argument
@@ -26,4 +27,4 @@ class TestArgument(unittest.TestCase):
         data = {'type': T.COLUMN, 'value': 'address'}
         argument = Argument.from_data(data)
         self.assertEqual(argument.type, T.COLUMN)
-        self.assertEqual(argument.value, 'address')
+        self.assertEqual(str(argument.value), str(F.col('address')))
