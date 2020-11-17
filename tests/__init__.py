@@ -70,6 +70,6 @@ def bootstrap_test_spark_session(conf=None):
     return spark
 
 
-spark = bootstrap_test_spark_session()
-quiet_py4j(spark)
+# spark = bootstrap_test_spark_session()
+# quiet_py4j(spark)
 

@@ -11,7 +11,7 @@ from typing import List
 from typing import Any
 
 from src.dsl.constants import Types
-from src.dsl.mappings.operations import DSL_FUNCTIONS
+from src.dsl.mappings.operations import DSL_OPERATIONS
 
 
 def _parse_arguments(args: List[Dict]) -> List[Any]:

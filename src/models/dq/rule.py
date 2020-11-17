@@ -1,7 +1,12 @@
+import networkx as nx
+
 from src.models.dq.argument import Argument
 
 from typing import List
 from typing import Dict
+
+
+Graph = nx.DiGraph
 
 
 def _validate_computational_graph(graph: Dict) -> bool:
@@ -23,14 +28,16 @@ class Rule(object):
     describing how to unitary elements should be composed
     """
 
-    def __init__(self, id: str, graph: Dict):
+    def __init__(self, id: str, name: str, graph: Graph):
         self.id = id
-        self.name
-        self.arguments = arguments
+        self.name = name
+        self.graph = graph
+        self.op = resolve(graph) -> Column[Boolean]
 
     @staticmethod
     def from_data(data):
         id = data['id']
-        arguments = [Argument.from_data(a) for a in data['arguments']]
-        return Function(id, arguments)
+        name = data['name']
+        graph = _parse_rule_computational_graph(data['graph'])
+        return Rule(id, name, graph)
 

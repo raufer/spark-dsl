@@ -1,0 +1,42 @@
+import operator
+import logging
+
+from typing import TypeVar
+from typing import Generic
+from typing import Callable
+
+from src.engine.graph.constants import BRANCH_FUNCTIONS
+from src.models.engine.column import Column
+
+logger = logging.getLogger(__name__)
+
+
+T = TypeVar('T')
+
+
+class BranchNode(Generic[T]):
+    """
+    A Branch Node represents a function that receives a pair
+    and returns a parameterized type `T`
+    """
+
+    def __init__(self, f: Callable[[Column[bool], Column[bool]], Column[bool]]):
+        self.f = f
+
+    @staticmethod
+    def from_data(data):
+        function_id = data['function']
+
+        if function_id == BRANCH_FUNCTIONS.AND:
+            function = operator.and_
+        elif function_id == BRANCH_FUNCTIONS.OR:
+            function = operator.or_
+        elif function_id == BRANCH_FUNCTIONS.XOR:
+            function = operator.xor
+        else:
+            raise NotImplementedError(f"Unknown Branch Function '{function_id}'")
+
+        return BranchNode(function)
+
+
+

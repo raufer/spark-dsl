@@ -1,7 +1,6 @@
 import os
 import logging
 import warnings
-import pyspark
 
 from pyspark.sql import SparkSession
 
@@ -15,6 +14,5 @@ logging.basicConfig(
 
 ROOT = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
 
-spark = SparkSession.builder.master("local").getOrCreate()
 
 
