@@ -20,24 +20,27 @@ def _validate_computational_graph(graph: Dict) -> bool:
 
 class Rule(object):
     """
-    A Rule is a composition of one or more function applications;
+    Currently, a Rule is the logical result of the combination of
+    multiple boolean operations
 
     R :: (g) -> bool
 
     where `g` is a binary computational tree
-    describing how to unitary elements should be composed
+    describing the association rules of the unitary elements
+
+    #TODO: Implement `resolve graph`
     """
 
     def __init__(self, id: str, name: str, graph: Graph):
         self.id = id
         self.name = name
         self.graph = graph
-        self.op = resolve(graph) -> Column[Boolean]
+        # self.op = resolve(graph) -> Column[Boolean]
 
     @staticmethod
     def from_data(data):
         id = data['id']
         name = data['name']
-        graph = _parse_rule_computational_graph(data['graph'])
+        graph = parse_rule_computational_graph(data['graph'])
         return Rule(id, name, graph)
 

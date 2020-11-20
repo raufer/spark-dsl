@@ -7,6 +7,7 @@ from typing import List
 from typing import Dict
 
 from src.models.dq.operation import Operation
+from src.models.engine.graph.branch_node import BranchNode
 
 Graph = nx.DiGraph
 
@@ -57,5 +58,8 @@ def parse_rule_computational_graph(data: Dict) -> Graph:
             graph.add_node(id, type=NODE_TYPE.LEAF, value=op)
         else:
             raise NotImplementedError(f"Unknown node type '{type}'")
+
+    for a, b in data['edges']:
+        graph.add_edge(a, b)
 
     return graph

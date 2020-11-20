@@ -26,6 +26,16 @@ class Operation(object):
         self.arguments = arguments
         self.op = DSL_OPERATIONS[id](*[a.value for a in arguments])
 
+    def __eq__(self, other):
+        if isinstance(other, self.__class__):
+            return all([
+                self.id == other.id,
+                self.arguments == other.arguments,
+                str(self.op) == str(other.op)
+            ])
+        else:
+            return False
+
     @staticmethod
     def from_data(data):
         id = data['id']
