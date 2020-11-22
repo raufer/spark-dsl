@@ -1,5 +1,6 @@
 import networkx as nx
 
+from src.engine.graph.parse import parse_rule_computational_graph
 from src.models.dq.argument import Argument
 
 from typing import List
