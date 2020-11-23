@@ -1,18 +1,47 @@
+import networkx as nx
 import unittest
 
 import pyspark.sql.types as T
 import pyspark.sql.functions as F
 
-from src.models.dq.operation import Operation
-from src.constants.argument_types import ARGUMENT_TYPES as AT
 from src.constants.operations_ids import OPERATION_ID as OID
-from src.models.dq.argument import Argument
+from src.models.dq.rule import Rule
+from pyspark.sql import Column
 
 from tests.utils.spark_test_case import SparkTestCase
 from tests import spark
 
 
-class TestOperation(SparkTestCase):
+class TestModelsDQRule(SparkTestCase):
 
     def test_parse(self):
-        pass
+
+        f = {
+            'id': OID.NOT_NULL,
+            'arguments': [
+                {
+                    'type': 'column',
+                    'value': 'age'
+                }
+            ]
+        }
+        graph = {
+          'nodes': [
+              {'id': 0, 'type': 'leaf',  'data': f}
+          ],
+          'edges': []
+        }
+
+        data = {
+            'id': 'ID01',
+            'name': 'rule-A',
+            'graph': graph
+        }
+        rule = Rule.from_data(data)
+
+        self.assertEqual(rule.id, 'ID01')
+        self.assertEqual(rule.name, 'rule-A')
+        self.assertTrue(isinstance(rule.graph, nx.DiGraph))
+        self.assertTrue(isinstance(rule.op, Column))
+
+

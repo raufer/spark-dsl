@@ -1,5 +1,6 @@
 import networkx as nx
 
+from src.engine.graph.eval import resolve
 from src.engine.graph.parse import parse_rule_computational_graph
 from src.models.dq.argument import Argument
 
@@ -36,7 +37,7 @@ class Rule(object):
         self.id = id
         self.name = name
         self.graph = graph
-        # self.op = resolve(graph) -> Column[Boolean]
+        self.op = resolve(graph)
 
     @staticmethod
     def from_data(data):
