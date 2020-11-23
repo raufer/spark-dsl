@@ -28,3 +28,21 @@ class TestArgument(unittest.TestCase):
         argument = Argument.from_data(data)
         self.assertEqual(argument.type, T.COLUMN)
         self.assertEqual(str(argument.value), str(F.col('address')))
+
+    def test_parse_list_types(self):
+
+        data = {'type': T.LIST_FLOAT, 'value': [0.1, 0.2]}
+        argument = Argument.from_data(data)
+        self.assertEqual(argument.type, T.LIST_FLOAT)
+        self.assertEqual(argument.value, [0.1, 0.2])
+
+        data = {'type': T.LIST_INTEGERS, 'value': [1, 2, 3]}
+        argument = Argument.from_data(data)
+        self.assertEqual(argument.type, T.LIST_INTEGERS)
+        self.assertEqual(argument.value, [1, 2, 3])
+
+        data = {'type': T.LIST_STRINGS, 'value': ['A', 'B']}
+        argument = Argument.from_data(data)
+        self.assertEqual(argument.type, T.LIST_STRINGS)
+        self.assertEqual(argument.value, ['A', 'B'])
+

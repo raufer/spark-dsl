@@ -39,6 +39,10 @@ class Rule(object):
         self.graph = graph
         self.op = resolve(graph)
 
+    def __str__(self):
+        string = f"Rule(id={self.id}, name={self.name}, op={str(self.op)})"
+        return string
+
     @staticmethod
     def from_data(data):
         id = data['id']

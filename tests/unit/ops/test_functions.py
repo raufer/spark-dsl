@@ -91,5 +91,36 @@ class TestFunctions(SparkTestCase):
 
         self.assertDataFrameEqual(result, expected)
 
+    def test_is_in(self):
+
+        data = [
+            ('Joe', 'A'),
+            ('Sue', 'B'),
+            ('Ken', 'C'),
+            ('Tim', 'D'),
+            ('Ana', None),
+            (None, None)
+        ]
+        df = spark.createDataFrame(data, ['name', 'code'])
+
+        op = F.is_in(G.col('code'), ['A', 'D'])
+        result = df.withColumn('res', op)
+
+        data = [
+            ('Joe', 'A', True),
+            ('Sue', 'B', False),
+            ('Ken', 'C', False),
+            ('Tim', 'D', True),
+            ('Ana', None, None),
+            (None, None, None)
+        ]
+        schema = T.StructType([
+            T.StructField('name', T.StringType(), True),
+            T.StructField('code', T.StringType(), True),
+            T.StructField('res', T.BooleanType(), True)
+        ])
+        expected = spark.createDataFrame(data, schema)
+        self.assertDataFrameEqual(result, expected)
+
 
 

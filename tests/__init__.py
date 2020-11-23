@@ -22,9 +22,10 @@ def quiet_py4j(sc, level=logging.WARN):
     In Spark 2.x we can configure it dynamically:
     `spark.sparkContext.setLogLevel('WARN')`
     """
-    logging.getLogger('py4j').setLevel(level)
+    logging.getLogger('py4j').setLevel(logging.ERROR)
 
     logger = spark._sc._jvm.org.apache.log4j
+    logger.LogManager.getLogger("py4j").setLevel(logger.Level.ERROR)
     logger.LogManager.getLogger("org").setLevel(logger.Level.ERROR)
     logger.LogManager.getLogger("akka").setLevel(logger.Level.ERROR)
 
@@ -67,6 +68,7 @@ def bootstrap_test_spark_session(conf=None):
     """
     conf = conf or _default_spark_configuration()
     spark = SparkSession.builder.master("local").getOrCreate()
+    spark._sc.setLogLevel('WARN')
     return spark
 
 

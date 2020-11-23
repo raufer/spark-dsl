@@ -4,3 +4,6 @@ class ARGUMENT_TYPES:
     FLOAT = 'float'
     STRING = 'string'
     BOOL = 'bool'
+    LIST_INTEGERS = 'list[integer]'
+    LIST_STRINGS = 'list[string]'
+    LIST_FLOAT = 'list[float]'

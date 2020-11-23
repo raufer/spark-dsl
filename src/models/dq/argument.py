@@ -13,7 +13,10 @@ NATIVE_TYPES = {
     T.INTEGER,
     T.BOOL,
     T.STRING,
-    T.FLOAT
+    T.FLOAT,
+    T.LIST_STRINGS,
+    T.LIST_INTEGERS,
+    T.LIST_FLOAT
 }
 
 
@@ -27,8 +30,11 @@ def _parse_value(type: str, value: Any) -> Any:
     if type in NATIVE_TYPES:
         return value
 
-    if type == T.COLUMN:
+    elif type == T.COLUMN:
         return F.col(value)
+
+    else:
+        raise NotImplementedError(f"Unknown argument type '{type}'")
 
 
 class Argument(object):
