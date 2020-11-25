@@ -14,7 +14,7 @@ class TestEngineApply(SparkTestCase):
 
         data = [
             ('Joe', 30),
-            ('Sue', 15)
+            ('Sue', None)
         ]
         df = spark.createDataFrame(data, ['name', 'age'])
 
