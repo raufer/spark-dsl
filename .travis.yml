@@ -10,5 +10,6 @@ notifications:
   email:
     recipients:
       - joao.je.nisa@gmail.com
+      - brn.parra@gmail.com
     on_success: always
     on_failure: always
