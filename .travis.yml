@@ -1,0 +1,14 @@
+language: python
+python:
+  - 3.6
+script:
+  - pytest
+before_install:
+  - pip install pyspark
+  - pip install networkx
+notifications:
+  email:
+    recipients:
+      - joao.je.nisa@gmail.com
+    on_success: always
+    on_failure: always
