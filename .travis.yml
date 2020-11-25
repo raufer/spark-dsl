@@ -11,5 +11,7 @@ notifications:
     recipients:
       - joao.je.nisa@gmail.com
       - brn.parra@gmail.com
+      - raufer92@gmail.com
+      - jmesquita.dinis@gmail.com 
     on_success: always
     on_failure: always
