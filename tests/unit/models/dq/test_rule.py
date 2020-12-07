@@ -4,7 +4,9 @@ import unittest
 import pyspark.sql.types as T
 import pyspark.sql.functions as F
 
+from src.constants.dimensions import DIMENSION
 from src.constants.operations_ids import OPERATION_ID as OID
+from src.engine.graph.constants import NODE_TYPE
 from src.models.dq.rule import Rule
 from pyspark.sql import Column
 
@@ -27,7 +29,7 @@ class TestModelsDQRule(SparkTestCase):
         }
         graph = {
           'nodes': [
-              {'id': 0, 'type': 'leaf',  'data': f}
+              {'id': 0, 'type': NODE_TYPE.LEAF,  'data': f}
           ],
           'edges': []
         }
@@ -41,6 +43,39 @@ class TestModelsDQRule(SparkTestCase):
 
         self.assertEqual(rule.id, 'ID01')
         self.assertEqual(rule.name, 'rule-A')
+        self.assertEqual(rule.dimension, DIMENSION.NOT_DEFINED)
+        self.assertTrue(isinstance(rule.graph, nx.DiGraph))
+        self.assertTrue(isinstance(rule.op, Column))
+
+    def test_parse_dimension(self):
+
+        f = {
+            'id': OID.NOT_NULL,
+            'arguments': [
+                {
+                    'type': 'column',
+                    'value': 'age'
+                }
+            ]
+        }
+        graph = {
+            'nodes': [
+                {'id': 0, 'type': NODE_TYPE.LEAF,  'data': f}
+            ],
+            'edges': []
+        }
+
+        data = {
+            'id': 'ID01',
+            'name': 'rule-A',
+            'graph': graph,
+            'dimension': DIMENSION.ACCURACY
+        }
+        rule = Rule.from_data(data)
+
+        self.assertEqual(rule.id, 'ID01')
+        self.assertEqual(rule.name, 'rule-A')
+        self.assertEqual(rule.dimension, DIMENSION.ACCURACY)
         self.assertTrue(isinstance(rule.graph, nx.DiGraph))
         self.assertTrue(isinstance(rule.op, Column))
 
