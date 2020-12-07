@@ -27,7 +27,7 @@ class Package(object):
         self.rules = rules
 
     def __str__(self):
-        string = f"Package(id={self.id}, name={self.name}, description={str(self.description)}, entity={self.entity})"
+        string = f"Package(id={self.id}, name={self.name}, description={str(self.description)}, entity={self.entity}, n_rules={len(self.rules)})"
         return string
 
     @staticmethod
