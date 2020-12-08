@@ -30,15 +30,158 @@ pip install git+https://raufer@bitbucket.org/garuda-dq/garuda.git@v0.1#egg=garud
 
 #### Hello-World Example
 
-Define a rule that just checks if a column is null.
+Run a full `Package`
 
 ```python
+
+from pyspark.sql import SparkSession
+
+from garuda.constants.argument_types import ARGUMENT_TYPES
+from garuda.constants.dimensions import DIMENSION
+from garuda.constants.entities import ENTITY_TYPE
+from garuda.constants.operations_ids import OPERATION_ID as OID
+
+from garuda.engine.graph.constants import NODE_TYPE
+from garuda.models.dq.package import Package
+
+from garuda.engine.apply import apply_package
+
+spark = SparkSession.builder.master("local").getOrCreate()
+
+data = [
+    ('Joe', 30),
+    ('Joe', None),
+    ('Tim', 20),
+    ('Sue', 40),
+    ('Sue', None),
+    (None, None)
+]
+df = spark.createDataFrame(data, ['name', 'age'])
+
+df.show()
+
+f = {
+    'id': OID.NOT_NULL,
+    'arguments': [
+        {
+            'type': 'column',
+            'value': 'age'
+        }
+    ]
+}
+g = {
+    'id': OID.IS_IN,
+    'arguments': [
+        {
+            'type': 'column',
+            'value': 'name'
+        },
+        {
+            'type': ARGUMENT_TYPES.LIST_STRINGS,
+            'value': ['Joe', 'Tim']
+        }
+    ]
+}
+branch_node = {
+    'function': '&'
+}
+
+graph = {
+    'nodes': [
+        {'id': 0, 'type': NODE_TYPE.LEAF, 'data': f}
+    ],
+    'edges': []
+}
+rule_a = {
+    'id': 'ID01',
+    'name': 'rule-A',
+    'graph': graph,
+    'dimension': DIMENSION.COMPLETNESS
+}
+
+graph = {
+    'nodes': [
+        {'id': 0, 'type': NODE_TYPE.BRANCH, 'data': branch_node},
+        {'id': 1, 'type': NODE_TYPE.LEAF, 'data': f},
+        {'id': 2, 'type': NODE_TYPE.LEAF, 'data': g}
+    ],
+    'edges': [(0, 1), (0, 2)]
+}
+rule_b = {
+    'id': 'ID02',
+    'name': 'rule-B',
+    'graph': graph,
+    'dimension': DIMENSION.ACCURACY
+}
+
+rules = [
+    rule_a,
+    rule_b
+]
+
+entity = {
+    'type': ENTITY_TYPE.SQL,
+    'name': 'customer',
+    'database': 'db',
+    'table': 'table'
+}
+data = {
+    'id': 'PID01',
+    'name': 'Package 01',
+    'description': "Assessing the quality of Bruno's salary as a function of sales",
+    'entity': entity,
+    'rules': rules
+}
+
+package = Package(**data)
+result = apply_package(df, package)
+
+result.show()
+
+```
+
+Output
+
+```
+Original
++----+----+
+|name| age|
++----+----+
+| Joe|  30|
+| Joe|null|
+| Tim|  20|
+| Sue|  40|
+| Sue|null|
+|null|null|
++----+----+
+
+Result
++----+----+-----------+--------+-------+
+|name| age|_PACKAGE_ID|_RULE_ID|_RESULT|
++----+----+-----------+--------+-------+
+| Joe|  30|      PID01|    ID01|   true|
+| Joe|  30|      PID01|    ID02|   true|
+| Joe|null|      PID01|    ID01|  false|
+| Joe|null|      PID01|    ID02|  false|
+| Tim|  20|      PID01|    ID01|   true|
+| Tim|  20|      PID01|    ID02|   true|
+| Sue|  40|      PID01|    ID01|   true|
+| Sue|  40|      PID01|    ID02|  false|
+| Sue|null|      PID01|    ID01|  false|
+| Sue|null|      PID01|    ID02|  false|
+|null|null|      PID01|    ID01|  false|
+|null|null|      PID01|    ID02|  false|
++----+----+-----------+--------+-------+
+```
+
+Define a rule that just checks if a column is null.
+
 ```python
 from pyspark.sql import SparkSession
 
 from garuda.constants.operations_ids import OPERATION_ID as OID
-from src.engine.apply import apply_rule
-from src.models.dq.rule import Rule
+from garuda.engine.apply import apply_rule
+from garuda.models.dq.rule import Rule
 
 
 spark = SparkSession.builder.master("local").getOrCreate()
@@ -214,7 +357,7 @@ rule :: (f & g) | (h & k)
 ```python
 ```python
 from garuda.constants.operations_ids import OPERATION_ID as OID
-from src.engine.graph.constants import NODE_TYPE
+from garuda.engine.graph.constants import NODE_TYPE
 
 
 branch_node_and = {
@@ -303,7 +446,7 @@ rule :: f
 ```python
 ```python
 from garuda.constants.operations_ids import OPERATION_ID as OID
-from src.models.dq.rule import Rule
+from garuda.models.dq.rule import Rule
 
 
 f = {
