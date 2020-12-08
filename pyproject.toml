@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "poc-dsl"
+name = "garuda"
 version = "0.1.0"
 description = ""
 authors = ["raufer <raufer92@gmail.com>"]
