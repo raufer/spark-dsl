@@ -4,6 +4,9 @@ import unittest
 import pyspark.sql.types as T
 import pyspark.sql.functions as F
 
+from src.engine.graph.eval import resolve_graph
+from src.engine.graph.parse import parse_rule_computational_graph
+
 from src.constants.dimensions import DIMENSION
 from src.constants.operations_ids import OPERATION_ID as OID
 from src.engine.graph.constants import NODE_TYPE
@@ -39,13 +42,13 @@ class TestModelsDQRule(SparkTestCase):
             'name': 'rule-A',
             'graph': graph
         }
-        rule = Rule.from_data(data)
+        rule = Rule(**data)
 
         self.assertEqual(rule.id, 'ID01')
         self.assertEqual(rule.name, 'rule-A')
         self.assertEqual(rule.dimension, DIMENSION.NOT_DEFINED)
-        self.assertTrue(isinstance(rule.graph, nx.DiGraph))
-        self.assertTrue(isinstance(rule.op, Column))
+        self.assertTrue(isinstance(parse_rule_computational_graph(rule.graph), nx.DiGraph))
+        self.assertTrue(isinstance(resolve_graph(parse_rule_computational_graph(rule.graph)), Column))
 
     def test_parse_dimension(self):
 
@@ -71,12 +74,12 @@ class TestModelsDQRule(SparkTestCase):
             'graph': graph,
             'dimension': DIMENSION.ACCURACY
         }
-        rule = Rule.from_data(data)
+        rule = Rule(**data)
 
         self.assertEqual(rule.id, 'ID01')
         self.assertEqual(rule.name, 'rule-A')
         self.assertEqual(rule.dimension, DIMENSION.ACCURACY)
-        self.assertTrue(isinstance(rule.graph, nx.DiGraph))
-        self.assertTrue(isinstance(rule.op, Column))
+        self.assertTrue(isinstance(parse_rule_computational_graph(rule.graph), nx.DiGraph))
+        self.assertTrue(isinstance(resolve_graph(parse_rule_computational_graph(rule.graph)), Column))
 
 

@@ -2,7 +2,7 @@ from src.constants.entities import ENTITY_TYPE
 from src.models.dq.entity import Entity
 
 from typing import Dict
-from src.models.dq.entity.mysql import EntityMySQL
+from src.models.dq.entity.sql import EntitySQL
 
 
 def make_entity(data: Dict) -> Entity:
@@ -16,7 +16,7 @@ def make_entity(data: Dict) -> Entity:
     type = data['type']
 
     if type == ENTITY_TYPE.MYSQL:
-        return EntityMySQL.from_data(data)
+        return EntitySQL(**data)
 
     else:
         raise NotImplementedError(f"Unknown entity type '{type}'")

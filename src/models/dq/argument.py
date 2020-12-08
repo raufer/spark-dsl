@@ -2,6 +2,9 @@ import logging
 
 import pyspark.sql.functions as F
 
+from pydantic import BaseModel
+from pydantic import validator
+
 from typing import Any
 from src.constants.argument_types import ARGUMENT_TYPES as T
 
@@ -37,11 +40,14 @@ def _parse_value(type: str, value: Any) -> Any:
         raise NotImplementedError(f"Unknown argument type '{type}'")
 
 
-class Argument(object):
+class Argument(BaseModel):
 
-    def __init__(self, type: str, value: Any):
-        self.type = type
-        self.value = value
+    type: str
+    value: Any
+
+    @validator('value')
+    def validate_value(cls, v, values, **kwargs):
+        return _parse_value(values['type'], v)
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):

@@ -44,7 +44,7 @@ class TestGraphParse(SparkTestCase):
 
         expected_data_0 = {
             'type': NODE_TYPE.LEAF,
-            'value': Operation.from_data(f)
+            'value': Operation(**f)
         }
 
         self.assertDictEqual(graph.nodes[0], expected_data_0)
@@ -98,13 +98,13 @@ class TestGraphParse(SparkTestCase):
 
         expected_data = {
             'type': NODE_TYPE.LEAF,
-            'value': Operation.from_data(f)
+            'value': Operation(**f)
         }
         self.assertDictEqual(graph.nodes[1], expected_data)
 
         expected_data = {
             'type': NODE_TYPE.LEAF,
-            'value': Operation.from_data(g)
+            'value': Operation(**g)
         }
         self.assertDictEqual(graph.nodes[2], expected_data)
 

@@ -48,7 +48,7 @@ class TestEngineApply(SparkTestCase):
             'name': 'rule-01',
             'graph': graph
         }
-        rule = Rule.from_data(data)
+        rule = Rule(**data)
 
         result = apply_rule(df, rule)
 
@@ -99,7 +99,7 @@ class TestEngineApply(SparkTestCase):
             'name': 'rule-01',
             'graph': graph
         }
-        rule = Rule.from_data(data)
+        rule = Rule(**data)
 
         result = apply_rule(df, rule)
 
@@ -189,7 +189,7 @@ class TestEngineApply(SparkTestCase):
         ]
 
         entity = {
-            'type': ENTITY_TYPE.MYSQL,
+            'type': ENTITY_TYPE.SQL,
             'name': 'customer',
             'database': 'db',
             'table': 'table'
@@ -202,7 +202,7 @@ class TestEngineApply(SparkTestCase):
             'rules': rules
         }
 
-        package = Package.from_data(data)
+        package = Package(**data)
         result = apply_package(df, package)
 
         data = [

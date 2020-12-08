@@ -1,9 +1,9 @@
 import networkx as nx
 
+from pydantic import BaseModel
+from pydantic import validator
+
 from src.constants.dimensions import DIMENSION
-from src.engine.graph.eval import resolve
-from src.engine.graph.parse import parse_rule_computational_graph
-from src.models.dq.argument import Argument
 
 from typing import List
 from typing import Dict
@@ -21,7 +21,7 @@ def _validate_computational_graph(graph: Dict) -> bool:
     return True
 
 
-class Rule(object):
+class Rule(BaseModel):
     """
     Currently, a Rule is the logical result of the combination of
     multiple boolean operations
@@ -30,20 +30,22 @@ class Rule(object):
 
     where `g` is a binary computational tree
     describing the association rules of the unitary elements
-
-    #TODO: Implement `resolve graph`
     """
 
-    def __init__(self, id: str, name: str, graph: Graph, dimension: str = DIMENSION.NOT_DEFINED, description: str = None):
-        self.id = id
-        self.name = name
-        self.graph = graph
-        self.dimension = dimension
-        self.descrition = description
-        self.op = resolve(graph)
+    id: str
+    name: str
+    graph: Dict
+    dimension: str = DIMENSION.NOT_DEFINED
+    description: str = None
+
+    @validator('graph')
+    def check_graph(cls, g):
+        if not _validate_computational_graph(g):
+            raise ValueError('Invalid Graph')
+        return g
 
     def __str__(self):
-        string = f"Rule(id={self.id}, name={self.name}, op={str(self.op)}, dimension={self.dimension})"
+        string = f"Rule(id={self.id}, name={self.name}, dimension={self.dimension}, description={self.description})"
         return string
 
     @staticmethod
@@ -52,6 +54,6 @@ class Rule(object):
         name = data['name']
         dimension = data.get('dimension', DIMENSION.NOT_DEFINED)
         description = data.get('description')
-        graph = parse_rule_computational_graph(data['graph'])
-        return Rule(id, name, graph, dimension, description)
+        graph = data['graph']
+        return Rule(id=id, name=name, graph=graph, dimension=dimension, description=description)
 

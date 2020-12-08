@@ -4,6 +4,8 @@ import pyspark.sql.functions as F
 
 from pyspark.sql import DataFrame
 
+from src.engine.graph.eval import resolve_graph
+from src.engine.graph.parse import parse_rule_computational_graph
 from src.models.dq.package import Package
 from src.models.dq.rule import Rule
 from functools import reduce
@@ -22,7 +24,9 @@ def apply_rule(df: DataFrame, rule: Rule) -> DataFrame:
     * the new column is set via `rule.name`
     """
     logger.debug(f"Applying rule '{str(rule)}'")
-    df = df.withColumn(rule.id, rule.op)
+    graph = parse_rule_computational_graph(rule.graph)
+    op = resolve_graph(graph)
+    df = df.withColumn(rule.id, op)
     return df
 
 

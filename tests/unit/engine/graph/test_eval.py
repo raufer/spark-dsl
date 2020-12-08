@@ -5,7 +5,7 @@ import pyspark.sql.functions as F
 
 from src.constants.operations_ids import OPERATION_ID as OID
 from src.engine.graph.constants import NODE_TYPE
-from src.engine.graph.eval import resolve
+from src.engine.graph.eval import resolve_graph
 
 from src.engine.graph.parse import parse_rule_computational_graph
 from src.models.dq.argument import Argument
@@ -39,7 +39,7 @@ class TestEngineGraphEval(SparkTestCase):
         }
 
         graph = parse_rule_computational_graph(data)
-        op = resolve(graph)
+        op = resolve_graph(graph)
 
         data = [
             ('Joe', 30),
@@ -110,7 +110,7 @@ class TestEngineGraphEval(SparkTestCase):
         }
 
         graph = parse_rule_computational_graph(data)
-        op = resolve(graph)
+        op = resolve_graph(graph)
 
         data = [
             ('Joe', 30),
@@ -222,7 +222,7 @@ class TestEngineGraphEval(SparkTestCase):
         }
 
         graph = parse_rule_computational_graph(data)
-        op = resolve(graph)
+        op = resolve_graph(graph)
 
         data = [
             ('Joe', 22, 15000),

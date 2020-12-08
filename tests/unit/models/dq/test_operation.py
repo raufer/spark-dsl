@@ -3,6 +3,7 @@ import unittest
 import pyspark.sql.types as T
 import pyspark.sql.functions as F
 
+from src.engine.graph.eval import resolve_operation
 from src.models.dq.operation import Operation
 from src.constants.argument_types import ARGUMENT_TYPES as AT
 from src.constants.operations_ids import OPERATION_ID as OID
@@ -25,8 +26,8 @@ class TestOperation(SparkTestCase):
                 }
             ]
         }
-        operation = Operation.from_data(data)
-        arguments = [Argument(AT.COLUMN, F.col('age'))]
+        operation = Operation(**data)
+        arguments = [Argument(type=AT.COLUMN, value='age')]
         self.assertEqual(operation.id, OID.NOT_NULL)
         self.assertListEqual(operation.arguments, arguments)
 
@@ -47,8 +48,12 @@ class TestOperation(SparkTestCase):
             }
           ]
         }
-        operation = Operation.from_data(data)
-        arguments = [Argument(AT.COLUMN, F.col('salary')), Argument(AT.INTEGER, 70000), Argument(AT.INTEGER, 100000)]
+        operation = Operation(**data)
+        arguments = [
+            Argument(type=AT.COLUMN, value='salary'),
+            Argument(type=AT.INTEGER, value=70000),
+            Argument(type=AT.INTEGER, value=100000)
+        ]
         self.assertEqual(operation.id, OID.IS_BETWEEN)
         self.assertListEqual(operation.arguments, arguments)
 
@@ -63,14 +68,14 @@ class TestOperation(SparkTestCase):
                 }
             ]
         }
-        operation = Operation.from_data(data)
+        operation = Operation(**data)
 
         data = [
             ('Joe', 30),
             ('Sue', None)
         ]
         df = spark.createDataFrame(data, ['name', 'age'])
-        result = df.withColumn('res', operation.op)
+        result = df.withColumn('res', resolve_operation(operation))
 
         data = [
             ('Joe', 30, True),

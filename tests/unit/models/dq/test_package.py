@@ -8,8 +8,8 @@ from src.constants.dimensions import DIMENSION
 from src.constants.entities import ENTITY_TYPE
 from src.constants.operations_ids import OPERATION_ID as OID
 from src.engine.graph.constants import NODE_TYPE
-from src.models.dq.entity import EntityMySQL
 from src.models.dq.entity.factory import make_entity
+from src.models.dq.entity.sql import EntitySQL
 from src.models.dq.package import Package
 from src.models.dq.rule import Rule
 from pyspark.sql import Column
@@ -82,7 +82,7 @@ class TestModelsDQPackage(SparkTestCase):
         ]
 
         entity = {
-            'type': ENTITY_TYPE.MYSQL,
+            'dividend': 1,
             'name': 'customer',
             'database': 'db',
             'table': 'table'
@@ -95,7 +95,7 @@ class TestModelsDQPackage(SparkTestCase):
             'rules': rules
         }
 
-        package = Package.from_data(data)
+        package = Package(**data)
 
         self.assertEqual(package.id, 'PID01')
         self.assertEqual(package.name, 'Package 01')
@@ -110,7 +110,7 @@ class TestModelsDQPackage(SparkTestCase):
         self.assertEqual(rules[1].dimension, DIMENSION.ACCURACY)
 
         entity = package.entity
-        self.assertTrue(isinstance(entity, EntityMySQL))
+        self.assertTrue(isinstance(entity, EntitySQL))
         self.assertEqual(entity.name, 'customer')
         self.assertEqual(entity.database, 'db')
         self.assertEqual(entity.table, 'table')
