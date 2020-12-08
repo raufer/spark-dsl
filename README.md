@@ -22,7 +22,7 @@ pip install -e git://github.com/{ username }/{ reponame }.git@{ tag name }#egg={
 e.g.
 
 ```
-pip install git+https://raufer@bitbucket.org/garuda-dq/poc-dsl.git@v0.1#egg=garuda
+pip install git+https://raufer@bitbucket.org/garuda-dq/garuda.git@v0.1#egg=garuda
 ```
 
 ### Documentation

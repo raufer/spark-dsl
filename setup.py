@@ -12,7 +12,7 @@ setuptools.setup(
     description="DQ core spark package",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/pypa/sampleproject",
+    url=" https://raufer@bitbucket.org/garuda-dq/garuda.git",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
