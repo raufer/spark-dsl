@@ -3,7 +3,7 @@ import operator
 
 import pyspark.sql.types as T
 import pyspark.sql.functions as F
-from src.models.engine.graph.branch_node import BranchNode
+from garuda.models.engine.graph.branch_node import BranchNode
 
 from tests.utils.spark_test_case import SparkTestCase
 from tests import spark

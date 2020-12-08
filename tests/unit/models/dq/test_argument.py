@@ -1,8 +1,8 @@
 import unittest
 import pyspark.sql.functions as F
 
-from src.constants.argument_types import ARGUMENT_TYPES as T
-from src.models.dq.argument import Argument
+from garuda.constants.argument_types import ARGUMENT_TYPES as T
+from garuda.models.dq.argument import Argument
 
 from tests import spark
 

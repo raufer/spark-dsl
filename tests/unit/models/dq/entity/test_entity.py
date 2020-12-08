@@ -4,10 +4,10 @@ import unittest
 import pyspark.sql.types as T
 import pyspark.sql.functions as F
 
-from src.models.dq.entity.factory import make_entity
-from src.models.dq.entity.sql import EntitySQL
+from garuda.models.dq.entity.factory import make_entity
+from garuda.models.dq.entity.sql import EntitySQL
 
-from src.constants.entities import ENTITY_TYPE
+from garuda.constants.entities import ENTITY_TYPE
 
 from tests.utils.spark_test_case import SparkTestCase
 from tests import spark

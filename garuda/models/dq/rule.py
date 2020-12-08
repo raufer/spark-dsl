@@ -3,7 +3,7 @@ import networkx as nx
 from pydantic import BaseModel
 from pydantic import validator
 
-from src.constants.dimensions import DIMENSION
+from garuda.constants.dimensions import DIMENSION
 
 from typing import List
 from typing import Dict

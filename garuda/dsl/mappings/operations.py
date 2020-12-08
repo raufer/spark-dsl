@@ -1,4 +1,4 @@
-import src.ops.functions as F
+import garuda.ops.functions as F
 
 
 DSL_OPERATIONS = {

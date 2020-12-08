@@ -1,8 +1,8 @@
-from src.constants.entities import ENTITY_TYPE
-from src.models.dq.entity import Entity
+from garuda.constants.entities import ENTITY_TYPE
+from garuda.models.dq.entity import Entity
 
 from typing import Dict
-from src.models.dq.entity.sql import EntitySQL
+from garuda.models.dq.entity.sql import EntitySQL
 
 
 def make_entity(data: Dict) -> Entity:

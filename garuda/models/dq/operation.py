@@ -3,8 +3,8 @@ import logging
 from pydantic import BaseModel
 from pydantic import validator
 
-from src.dsl.mappings.operations import DSL_OPERATIONS
-from src.models.dq.argument import Argument
+from garuda.dsl.mappings.operations import DSL_OPERATIONS
+from garuda.models.dq.argument import Argument
 
 from typing import List
 

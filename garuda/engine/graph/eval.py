@@ -4,10 +4,10 @@ import pyspark.sql.functions as F
 
 from functools import reduce
 
-from src.dsl.mappings.operations import DSL_OPERATIONS
-from src.engine.graph.constants import NODE_TYPE
-from src.models.dq.operation import Operation
-from src.models.engine.column import Column
+from garuda.dsl.mappings.operations import DSL_OPERATIONS
+from garuda.engine.graph.constants import NODE_TYPE
+from garuda.models.dq.operation import Operation
+from garuda.models.engine.column import Column
 
 Graph = nx.DiGraph
 

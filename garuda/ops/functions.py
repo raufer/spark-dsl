@@ -1,7 +1,7 @@
 import pyspark
 import pyspark.sql.functions as F
 
-from src.models.engine.column import Column
+from garuda.models.engine.column import Column
 from typing import Any
 from typing import List
 

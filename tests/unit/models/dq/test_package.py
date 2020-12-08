@@ -4,14 +4,14 @@ import unittest
 import pyspark.sql.types as T
 import pyspark.sql.functions as F
 
-from src.constants.dimensions import DIMENSION
-from src.constants.entities import ENTITY_TYPE
-from src.constants.operations_ids import OPERATION_ID as OID
-from src.engine.graph.constants import NODE_TYPE
-from src.models.dq.entity.factory import make_entity
-from src.models.dq.entity.sql import EntitySQL
-from src.models.dq.package import Package
-from src.models.dq.rule import Rule
+from garuda.constants.dimensions import DIMENSION
+from garuda.constants.entities import ENTITY_TYPE
+from garuda.constants.operations_ids import OPERATION_ID as OID
+from garuda.engine.graph.constants import NODE_TYPE
+from garuda.models.dq.entity.factory import make_entity
+from garuda.models.dq.entity.sql import EntitySQL
+from garuda.models.dq.package import Package
+from garuda.models.dq.rule import Rule
 from pyspark.sql import Column
 
 from tests.utils.spark_test_case import SparkTestCase

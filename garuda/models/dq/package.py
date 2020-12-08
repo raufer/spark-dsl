@@ -8,10 +8,10 @@ from typing import Union
 from pydantic import BaseModel
 from pydantic import validator
 
-from src.models.dq.entity.sql import EntitySQL
+from garuda.models.dq.entity.sql import EntitySQL
 
-from src.models.dq.entity.factory import make_entity
-from src.models.dq.rule import Rule
+from garuda.models.dq.entity.factory import make_entity
+from garuda.models.dq.rule import Rule
 
 Graph = nx.DiGraph
 

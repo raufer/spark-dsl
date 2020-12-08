@@ -3,8 +3,8 @@ import networkx as nx
 from pydantic import BaseModel
 from pydantic import validator
 
-from src.constants.entities import ENTITY_TYPE
-from src.models.dq.entity import Entity
+from garuda.constants.entities import ENTITY_TYPE
+from garuda.models.dq.entity import Entity
 
 Graph = nx.DiGraph
 

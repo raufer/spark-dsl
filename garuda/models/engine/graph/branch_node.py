@@ -5,8 +5,8 @@ from typing import TypeVar
 from typing import Generic
 from typing import Callable
 
-from src.engine.graph.constants import BRANCH_FUNCTIONS
-from src.models.engine.column import Column
+from garuda.engine.graph.constants import BRANCH_FUNCTIONS
+from garuda.models.engine.column import Column
 
 logger = logging.getLogger(__name__)
 

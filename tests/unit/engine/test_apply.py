@@ -1,17 +1,17 @@
 import pyspark.sql.types as T
 
-from src.constants.argument_types import ARGUMENT_TYPES
-from src.constants.dimensions import DIMENSION
-from src.constants.entities import ENTITY_TYPE
-from src.constants.operations_ids import OPERATION_ID as OID
-from src.constants.tables.dq_results import DQResultsTable as DQ_TBL
+from garuda.constants.argument_types import ARGUMENT_TYPES
+from garuda.constants.dimensions import DIMENSION
+from garuda.constants.entities import ENTITY_TYPE
+from garuda.constants.operations_ids import OPERATION_ID as OID
+from garuda.constants.tables.dq_results import DQResultsTable as DQ_TBL
 
-from src.engine.graph.constants import NODE_TYPE
-from src.models.dq.package import Package
-from src.models.dq.rule import Rule
+from garuda.engine.graph.constants import NODE_TYPE
+from garuda.models.dq.package import Package
+from garuda.models.dq.rule import Rule
 
-from src.engine.apply import apply_rule
-from src.engine.apply import apply_package
+from garuda.engine.apply import apply_rule
+from garuda.engine.apply import apply_package
 
 from tests.utils.spark_test_case import SparkTestCase
 from tests import spark

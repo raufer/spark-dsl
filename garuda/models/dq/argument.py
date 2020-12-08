@@ -6,7 +6,7 @@ from pydantic import BaseModel
 from pydantic import validator
 
 from typing import Any
-from src.constants.argument_types import ARGUMENT_TYPES as T
+from garuda.constants.argument_types import ARGUMENT_TYPES as T
 
 
 logger = logging.getLogger(__name__)

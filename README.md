@@ -33,9 +33,10 @@ pip install git+https://raufer@bitbucket.org/garuda-dq/poc-dsl.git@v0.1#egg=garu
 Define a rule that just checks if a column is null.
 
 ```python
+```python
 from pyspark.sql import SparkSession
 
-from src.constants.operations_ids import OPERATION_ID as OID
+from garuda.constants.operations_ids import OPERATION_ID as OID
 from src.engine.apply import apply_rule
 from src.models.dq.rule import Rule
 
@@ -160,7 +161,8 @@ rule :: f & g
 ```
 
 ```python
-from src.engine.graph.constants import NODE_TYPE
+```python
+from garuda.engine.graph.constants import NODE_TYPE
 
 
 branch_node = {
@@ -210,7 +212,8 @@ rule :: (f & g) | (h & k)
 ```
 
 ```python
-from src.constants.operations_ids import OPERATION_ID as OID
+```python
+from garuda.constants.operations_ids import OPERATION_ID as OID
 from src.engine.graph.constants import NODE_TYPE
 
 
@@ -298,7 +301,8 @@ rule :: f
 ```
 
 ```python
-from src.constants.operations_ids import OPERATION_ID as OID
+```python
+from garuda.constants.operations_ids import OPERATION_ID as OID
 from src.models.dq.rule import Rule
 
 

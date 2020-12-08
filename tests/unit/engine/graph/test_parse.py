@@ -3,13 +3,13 @@ import unittest
 import pyspark.sql.types as T
 import pyspark.sql.functions as F
 
-from src.constants.operations_ids import OPERATION_ID as OID
-from src.engine.graph.constants import NODE_TYPE
+from garuda.constants.operations_ids import OPERATION_ID as OID
+from garuda.engine.graph.constants import NODE_TYPE
 
-from src.engine.graph.parse import parse_rule_computational_graph
-from src.models.dq.argument import Argument
-from src.models.dq.operation import Operation
-from src.models.engine.graph.branch_node import BranchNode
+from garuda.engine.graph.parse import parse_rule_computational_graph
+from garuda.models.dq.argument import Argument
+from garuda.models.dq.operation import Operation
+from garuda.models.engine.graph.branch_node import BranchNode
 
 from tests.utils.spark_test_case import SparkTestCase
 from tests import spark

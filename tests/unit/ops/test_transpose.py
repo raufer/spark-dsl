@@ -1,10 +1,10 @@
 import unittest
 
-import src.ops.functions as F
+import garuda.ops.functions as F
 import pyspark.sql.functions as G
 import pyspark.sql.types as T
 
-from src.ops.transpose import transpose_columns_to_rows
+from garuda.ops.transpose import transpose_columns_to_rows
 from tests.utils.spark_test_case import SparkTestCase
 from tests import spark
 

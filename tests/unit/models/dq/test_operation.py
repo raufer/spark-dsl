@@ -3,11 +3,11 @@ import unittest
 import pyspark.sql.types as T
 import pyspark.sql.functions as F
 
-from src.engine.graph.eval import resolve_operation
-from src.models.dq.operation import Operation
-from src.constants.argument_types import ARGUMENT_TYPES as AT
-from src.constants.operations_ids import OPERATION_ID as OID
-from src.models.dq.argument import Argument
+from garuda.engine.graph.eval import resolve_operation
+from garuda.models.dq.operation import Operation
+from garuda.constants.argument_types import ARGUMENT_TYPES as AT
+from garuda.constants.operations_ids import OPERATION_ID as OID
+from garuda.models.dq.argument import Argument
 
 from tests.utils.spark_test_case import SparkTestCase
 from tests import spark

@@ -4,14 +4,14 @@ import pyspark.sql.functions as F
 
 from pyspark.sql import DataFrame
 
-from src.engine.graph.eval import resolve_graph
-from src.engine.graph.parse import parse_rule_computational_graph
-from src.models.dq.package import Package
-from src.models.dq.rule import Rule
+from garuda.engine.graph.eval import resolve_graph
+from garuda.engine.graph.parse import parse_rule_computational_graph
+from garuda.models.dq.package import Package
+from garuda.models.dq.rule import Rule
 from functools import reduce
 
-from src.constants.tables.dq_results import DQResultsTable as DQ_TBL
-from src.ops.transpose import transpose_columns_to_rows
+from garuda.constants.tables.dq_results import DQResultsTable as DQ_TBL
+from garuda.ops.transpose import transpose_columns_to_rows
 
 logger = logging.getLogger(__name__)
 

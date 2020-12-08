@@ -1,6 +1,6 @@
 import unittest
 
-import src.ops.functions as F
+import garuda.ops.functions as F
 import pyspark.sql.functions as G
 import pyspark.sql.types as T
 

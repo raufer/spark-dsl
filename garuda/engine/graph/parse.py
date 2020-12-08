@@ -1,13 +1,13 @@
 import networkx as nx
 
-from src.engine.graph.constants import NODE_TYPE
-from src.models.dq.argument import Argument
+from garuda.engine.graph.constants import NODE_TYPE
+from garuda.models.dq.argument import Argument
 
 from typing import List
 from typing import Dict
 
-from src.models.dq.operation import Operation
-from src.models.engine.graph.branch_node import BranchNode
+from garuda.models.dq.operation import Operation
+from garuda.models.engine.graph.branch_node import BranchNode
 
 Graph = nx.DiGraph
 
