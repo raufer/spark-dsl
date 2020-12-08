@@ -12,6 +12,19 @@ Dev environment setup with:
 poetry install
 ```
 
+To install private dependencies
+```
+
+pip install -e git://github.com/{ username }/{ reponame }.git@{ tag name }#egg={ desired egg name }
+
+```
+
+e.g.
+
+```
+pip install git+https://raufer@bitbucket.org/garuda-dq/poc-dsl.git@v0.1#egg=garuda
+```
+
 ### Documentation
 
 
