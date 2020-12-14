@@ -44,7 +44,7 @@ class TestEngineApply(SparkTestCase):
         }
 
         data = {
-            'id': 'ID01',
+            '_id': 'ID01',
             'name': 'rule-01',
             'graph': graph
         }
@@ -95,7 +95,7 @@ class TestEngineApply(SparkTestCase):
         }
 
         data = {
-            'id': 'ID01',
+            '_id': 'ID01',
             'name': 'rule-01',
             'graph': graph
         }
@@ -162,7 +162,7 @@ class TestEngineApply(SparkTestCase):
             'edges': []
         }
         rule_a = {
-            'id': 'ID01',
+            '_id': 'ID01',
             'name': 'rule-A',
             'graph': graph,
             'dimension': DIMENSION.COMPLETNESS
@@ -177,7 +177,7 @@ class TestEngineApply(SparkTestCase):
             'edges': [(0, 1), (0, 2)]
         }
         rule_b = {
-            'id': 'ID02',
+            '_id': 'ID02',
             'name': 'rule-B',
             'graph': graph,
             'dimension': DIMENSION.ACCURACY
@@ -195,12 +195,15 @@ class TestEngineApply(SparkTestCase):
             'table': 'table'
         }
         data = {
-            'id': 'PID01',
+            '_id': 'PID01',
             'name': 'Package 01',
             'description': "Assessing the quality of Bruno's salary as a function of sales",
             'entity': entity,
             'rules': rules
         }
+        # import json
+        # print(json.dumps(data, indent=4, sort_keys=True))
+        # raise ValueError
 
         package = Package(**data)
         result = apply_package(df, package)

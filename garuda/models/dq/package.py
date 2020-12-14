@@ -6,6 +6,7 @@ from typing import Dict
 from typing import Union
 
 from pydantic import BaseModel
+from pydantic import Field
 from pydantic import validator
 
 from garuda.models.dq.entity.sql import EntitySQL
@@ -24,7 +25,7 @@ class Package(BaseModel):
     rules :: [Rule]
     entity :: Entity -> connection details (storage-type-specific)
     """
-    id: str
+    id: Optional[str] = Field(None, alias='_id')
     name: str
     entity: Union[EntitySQL]
     rules: List[Rule]

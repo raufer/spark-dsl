@@ -38,7 +38,36 @@ class TestModelsDQRule(SparkTestCase):
         }
 
         data = {
-            'id': 'ID01',
+            'name': 'rule-A',
+            'graph': graph
+        }
+        rule = Rule(**data)
+
+        self.assertEqual(rule.name, 'rule-A')
+        self.assertEqual(rule.dimension, DIMENSION.NOT_DEFINED)
+        self.assertTrue(isinstance(parse_rule_computational_graph(rule.graph), nx.DiGraph))
+        self.assertTrue(isinstance(resolve_graph(parse_rule_computational_graph(rule.graph)), Column))
+
+    def test_parse_id(self):
+
+        f = {
+            'id': OID.NOT_NULL,
+            'arguments': [
+                {
+                    'type': 'column',
+                    'value': 'age'
+                }
+            ]
+        }
+        graph = {
+            'nodes': [
+                {'id': 0, 'type': NODE_TYPE.LEAF,  'data': f}
+            ],
+            'edges': []
+        }
+
+        data = {
+            '_id': 'ID01',
             'name': 'rule-A',
             'graph': graph
         }
@@ -69,7 +98,7 @@ class TestModelsDQRule(SparkTestCase):
         }
 
         data = {
-            'id': 'ID01',
+            '_id': 'ID01',
             'name': 'rule-A',
             'graph': graph,
             'dimension': DIMENSION.ACCURACY

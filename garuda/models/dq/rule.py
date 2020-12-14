@@ -1,12 +1,14 @@
 import networkx as nx
 
 from pydantic import BaseModel
+from pydantic import Field
 from pydantic import validator
 
 from garuda.constants.dimensions import DIMENSION
 
 from typing import List
 from typing import Dict
+from typing import Optional
 
 
 Graph = nx.DiGraph
@@ -31,8 +33,7 @@ class Rule(BaseModel):
     where `g` is a binary computational tree
     describing the association rules of the unitary elements
     """
-
-    id: str
+    id: Optional[str] = Field(None, alias='_id')
     name: str
     graph: Dict
     dimension: str = DIMENSION.NOT_DEFINED

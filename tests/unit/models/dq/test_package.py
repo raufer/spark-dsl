@@ -55,7 +55,7 @@ class TestModelsDQPackage(SparkTestCase):
             'edges': []
         }
         rule_a = {
-            'id': 'ID01',
+            '_id': 'ID01',
             'name': 'rule-A',
             'graph': graph,
             'dimension': DIMENSION.COMPLETNESS
@@ -70,7 +70,7 @@ class TestModelsDQPackage(SparkTestCase):
             'edges': [(0, 1), (0, 2)]
         }
         rule_b = {
-            'id': 'ID02',
+            '_id': 'ID02',
             'name': 'rule-B',
             'graph': graph,
             'dimension': DIMENSION.ACCURACY
@@ -88,7 +88,7 @@ class TestModelsDQPackage(SparkTestCase):
             'table': 'table'
         }
         data = {
-            'id': 'PID01',
+            '_id': 'PID01',
             'name': 'Package 01',
             'description': "Assessing the quality of Bruno's salary as a function of sales",
             'entity': entity,
