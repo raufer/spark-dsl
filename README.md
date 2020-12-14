@@ -25,6 +25,11 @@ e.g.
 pip install git+https://raufer@bitbucket.org/garuda-dq/garuda.git@v0.1#egg=garuda
 ```
 
+Or
+```bash
+poetry add git+ssh://raufer@bitbucket.org/garuda-dq/garuda.git
+```
+
 ### Documentation
 
 
