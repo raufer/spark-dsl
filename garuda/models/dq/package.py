@@ -32,7 +32,7 @@ class Package(BaseModel):
     rules: List[Rule]
     description: str = None
 
-    @validator('id')
+    @validator('id', '_id')
     def validate_id(cls, v):
         if not isinstance(v, str):
             v = str(v)
