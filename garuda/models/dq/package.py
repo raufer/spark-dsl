@@ -4,6 +4,7 @@ from typing import List
 from typing import Optional
 from typing import Dict
 from typing import Union
+from typing import Any
 
 from pydantic import BaseModel
 from pydantic import Field
@@ -25,14 +26,14 @@ class Package(BaseModel):
     rules :: [Rule]
     entity :: Entity -> connection details (storage-type-specific)
     """
-    id: Optional[str] = Field(None, alias='_id')
+    id: Optional[Any] = Field(None, alias='_id')
     revision: Optional[int]
     name: str
     entity: Union[EntitySQL]
     rules: List[Rule]
     description: str = None
 
-    @validator('id', '_id')
+    @validator('id')
     def validate_id(cls, v):
         if not isinstance(v, str):
             v = str(v)
@@ -51,3 +52,15 @@ class Package(BaseModel):
         rules = data['rules']
         return Package(id=id, name=name, description=description, entity=entity, rules=rules)
 
+
+if __name__ == '__main__':
+
+    class A:
+        ...
+
+    data = {
+        '_id': A(),
+        'name': 'V'
+    }
+
+    print(Package(**data))
