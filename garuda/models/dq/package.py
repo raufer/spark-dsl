@@ -25,6 +25,11 @@ class Package(BaseModel):
 
     rules :: [Rule]
     entity :: Entity -> connection details (storage-type-specific)
+
+    `id` is the unique identifier of the object
+
+    `id_ref` is the identifier of the most current version of the object
+    in the case the object in question is an historical one
     """
     id: Optional[Any] = Field(None, alias='_id')
     id_ref: Optional[Any] = Field(None, alias='_id_ref')
