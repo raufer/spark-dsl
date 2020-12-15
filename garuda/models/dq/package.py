@@ -27,13 +27,15 @@ class Package(BaseModel):
     entity :: Entity -> connection details (storage-type-specific)
     """
     id: Optional[Any] = Field(None, alias='_id')
+    id_ref: Optional[Any] = Field(None, alias='_id_ref')
+
     revision: Optional[int]
     name: str
     entity: Union[EntitySQL]
     rules: List[Rule]
     description: str = None
 
-    @validator('id')
+    @validator('id', 'id_ref')
     def validate_id(cls, v):
         if not isinstance(v, str):
             v = str(v)
