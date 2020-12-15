@@ -26,6 +26,7 @@ class Package(BaseModel):
     entity :: Entity -> connection details (storage-type-specific)
     """
     id: Optional[str] = Field(None, alias='_id')
+    revision: Optional[int]
     name: str
     entity: Union[EntitySQL]
     rules: List[Rule]
