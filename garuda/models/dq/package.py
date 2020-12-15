@@ -32,6 +32,12 @@ class Package(BaseModel):
     rules: List[Rule]
     description: str = None
 
+    @validator('id')
+    def validate_id(cls, v):
+        if not isinstance(v, str):
+            v = str(v)
+        return v
+
     def __str__(self):
         string = f"Package(id={self.id}, name={self.name}, description={str(self.description)}, entity={self.entity}, n_rules={len(self.rules)})"
         return string

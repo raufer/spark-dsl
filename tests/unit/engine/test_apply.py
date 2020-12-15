@@ -201,9 +201,6 @@ class TestEngineApply(SparkTestCase):
             'entity': entity,
             'rules': rules
         }
-        # import json
-        # print(json.dumps(data, indent=4, sort_keys=True))
-        # raise ValueError
 
         package = Package(**data)
         result = apply_package(df, package)
