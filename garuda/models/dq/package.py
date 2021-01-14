@@ -42,9 +42,7 @@ class Package(BaseModel):
 
     @validator('id', 'id_ref')
     def validate_id(cls, v):
-        if v is None:
-            return v
-        elif not isinstance(v, str):
+        if (v is not None) and not isinstance(v, str):
             v = str(v)
         return v
 
