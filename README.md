@@ -161,22 +161,22 @@ Original
 +----+----+
 
 Result
-+----+----+-----------+--------+-------+
-|name| age|_PACKAGE_ID|_RULE_ID|_RESULT|
-+----+----+-----------+--------+-------+
-| Joe|  30|      PID01|    ID01|   true|
-| Joe|  30|      PID01|    ID02|   true|
-| Joe|null|      PID01|    ID01|  false|
-| Joe|null|      PID01|    ID02|  false|
-| Tim|  20|      PID01|    ID01|   true|
-| Tim|  20|      PID01|    ID02|   true|
-| Sue|  40|      PID01|    ID01|   true|
-| Sue|  40|      PID01|    ID02|  false|
-| Sue|null|      PID01|    ID01|  false|
-| Sue|null|      PID01|    ID02|  false|
-|null|null|      PID01|    ID01|  false|
-|null|null|      PID01|    ID02|  false|
-+----+----+-----------+--------+-------+
++----+----+-----------+--------+-------+--------------------------+
+|name|age |_PACKAGE_ID|_RULE_ID|_RESULT|_EXECUTION_TS             |
++----+----+-----------+--------+-------+--------------------------+
+|Joe |30  |PID01      |ID01    |true   |2021-01-26 18:30:43.378039|
+|Joe |30  |PID01      |ID02    |true   |2021-01-26 18:30:43.378044|
+|Joe |null|PID01      |ID01    |false  |2021-01-26 18:30:43.378044|
+|Joe |null|PID01      |ID02    |false  |2021-01-26 18:30:43.378045|
+|Tim |20  |PID01      |ID01    |true   |2021-01-26 18:30:43.378045|
+|Tim |20  |PID01      |ID02    |true   |2021-01-26 18:30:43.378046|
+|Sue |40  |PID01      |ID01    |true   |2021-01-26 18:30:43.378047|
+|Sue |40  |PID01      |ID02    |false  |2021-01-26 18:30:43.378047|
+|Sue |null|PID01      |ID01    |false  |2021-01-26 18:30:43.378048|
+|Sue |null|PID01      |ID02    |false  |2021-01-26 18:30:43.378048|
+|null|null|PID01      |ID01    |false  |2021-01-26 18:30:43.378049|
+|null|null|PID01      |ID02    |false  |2021-01-26 18:30:43.378049|
++----+----+-----------+--------+-------+--------------------------+
 ```
 
 Define a rule that just checks if a column is null.

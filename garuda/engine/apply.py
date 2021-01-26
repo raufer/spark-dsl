@@ -3,6 +3,7 @@ import logging
 import pyspark.sql.functions as F
 
 from pyspark.sql import DataFrame
+from datetime import datetime
 
 from garuda.engine.graph.eval import resolve_graph
 from garuda.engine.graph.parse import parse_rule_computational_graph
@@ -39,6 +40,7 @@ def apply_package(df: DataFrame, package: Package) -> DataFrame:
         PACKAGE_ID: the ID of the package (constant value)
         RULE_ID: the ID of each rule
         RESULT: a boolean with the logcal result of the application of a rule
+        EXECUTION_TS: A timestamp value to mark the execution point in time
 
     Note that the number of lines in the dataframe is increased.
     If the original data set has length of N;
@@ -58,5 +60,7 @@ def apply_package(df: DataFrame, package: Package) -> DataFrame:
         key_column=DQ_TBL.RULE_ID,
         value_column=DQ_TBL.RESULT
     )
+
+    df = df.withColumn(DQ_TBL.EXECUTION_TS, F.lit(datetime.now()))
 
     return df

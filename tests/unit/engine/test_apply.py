@@ -1,4 +1,7 @@
+import pyspark.sql.functions as F
 import pyspark.sql.types as T
+
+from datetime import datetime
 
 from garuda.constants.argument_types import ARGUMENT_TYPES
 from garuda.constants.dimensions import DIMENSION
@@ -206,27 +209,31 @@ class TestEngineApply(SparkTestCase):
         result = apply_package(df, package)
 
         data = [
-            ('Joe', 30, 'PID01', 'ID01', True),
-            ('Joe', 30, 'PID01', 'ID02', True),
-            ('Joe', None, 'PID01', 'ID01', False),
-            ('Joe', None, 'PID01', 'ID02', False),
-            ('Tim', 20, 'PID01', 'ID01', True),
-            ('Tim', 20, 'PID01', 'ID02', True),
-            ('Sue', 40, 'PID01', 'ID01', True),
-            ('Sue', 40, 'PID01', 'ID02', False),
-            ('Sue', None, 'PID01', 'ID01', False),
-            ('Sue', None, 'PID01', 'ID02', False),
-            (None, None, 'PID01', 'ID01', False),
-            (None, None, 'PID01', 'ID02', False)
+            ('Joe', 30, 'PID01', 'ID01', True, datetime.now()),
+            ('Joe', 30, 'PID01', 'ID02', True, datetime.now()),
+            ('Joe', None, 'PID01', 'ID01', False, datetime.now()),
+            ('Joe', None, 'PID01', 'ID02', False, datetime.now()),
+            ('Tim', 20, 'PID01', 'ID01', True, datetime.now()),
+            ('Tim', 20, 'PID01', 'ID02', True, datetime.now()),
+            ('Sue', 40, 'PID01', 'ID01', True, datetime.now()),
+            ('Sue', 40, 'PID01', 'ID02', False, datetime.now()),
+            ('Sue', None, 'PID01', 'ID01', False, datetime.now()),
+            ('Sue', None, 'PID01', 'ID02', False, datetime.now()),
+            (None, None, 'PID01', 'ID01', False, datetime.now()),
+            (None, None, 'PID01', 'ID02', False, datetime.now())
         ]
         schema = T.StructType([
             T.StructField('name', T.StringType(), True),
             T.StructField('age', T.LongType(), True),
             T.StructField(DQ_TBL.PACKAGE_ID, T.StringType(), False),
             T.StructField(DQ_TBL.RULE_ID, T.StringType(), False),
-            T.StructField(DQ_TBL.RESULT, T.BooleanType(), True)
+            T.StructField(DQ_TBL.RESULT, T.BooleanType(), True),
+            T.StructField(DQ_TBL.EXECUTION_TS, T.TimestampType(), True)
         ])
         expected = spark.createDataFrame(data, schema)
+
+        result = result.withColumn(DQ_TBL.EXECUTION_TS, F.to_date(F.col(DQ_TBL.EXECUTION_TS), "yyyy-MM-dd"))
+        expected = expected.withColumn(DQ_TBL.EXECUTION_TS, F.to_date(F.col(DQ_TBL.EXECUTION_TS), "yyyy-MM-dd"))
 
         self.assertDataFrameEqual(result, expected)
 
